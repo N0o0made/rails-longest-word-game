@@ -1,0 +1,28 @@
+
+<style>
+  .letter {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    display: inline-block;
+    border-radius: 5px;
+  }
+</style>
+
+<h1>New game</h1>
+<h2>Here are your letters:</h2>
+
+<ul>
+  <% @letters.each do |letter| %>
+    <li class="letter"><%= letter %></li>
+  <% end %>
+</ul>
+
+<h3>What is your word?</h3>
+<form action="/score" method="post" data-turbo="false">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type="hidden" name="letters" value="<%= @letters.join(' ') %>">
+  <input type="text" name="word" placeholder="Type your word here...">
+  <input type="submit" value="Play">
+</form>
